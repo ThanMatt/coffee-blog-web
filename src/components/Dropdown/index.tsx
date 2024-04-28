@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Dropdown as NXTDropdown,
+  Selection,
 } from "@nextui-org/react";
 import { useMemo, useState } from "react";
 
@@ -17,9 +18,10 @@ export type DropdownItem = {
 export type DropdownProps = {
   items: DropdownItem[];
   currentValue: DropdownItem;
+  onChange: (keys: Selection) => void;
 };
 
-export const Dropdown = ({ items, currentValue }: DropdownProps) => {
+export const Dropdown = ({ items, currentValue, onChange }: DropdownProps) => {
   const [value, setValue] = useState<any>(new Set([currentValue.key]));
   const selectedValue = useMemo(
     () => Array.from(value).join(", ").replaceAll("_", " "),
@@ -40,6 +42,7 @@ export const Dropdown = ({ items, currentValue }: DropdownProps) => {
         selectedKeys={value}
         onSelectionChange={(keys) => {
           setValue(keys);
+          onChange(keys);
         }}
       >
         {items.map((item) => {

@@ -45,16 +45,7 @@ export const Navbar = () => {
             label="Add new post"
             as={Link}
             color="primary"
-            href="/new-post"
-            variant="flat"
-          />
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            label="Log In"
-            as={Link}
-            color="primary"
-            href="/login"
+            href="/blog/new-post"
             variant="flat"
           />
         </NavbarItem>

@@ -6,6 +6,7 @@ import {
   CardHeader,
   Divider,
 } from "@nextui-org/react";
+import { formatDate } from "date-fns";
 import Link from "next/link";
 
 export const BlogPostCard = ({ blogPost }: { blogPost: BlogPostEntity }) => {
@@ -13,7 +14,7 @@ export const BlogPostCard = ({ blogPost }: { blogPost: BlogPostEntity }) => {
     <Card
       as={Link}
       href={`blog/${blogPost.id}`}
-      className="flex mb-4 hover:bg-gray-100 cursor-pointer"
+      className="flex mb-4 hover:bg-gray-100 cursor-pointer transition"
     >
       <CardHeader className="flex gap-3">
         <h1 className="text-xl font-bold truncate">{blogPost.title}</h1>
@@ -24,7 +25,7 @@ export const BlogPostCard = ({ blogPost }: { blogPost: BlogPostEntity }) => {
       </CardBody>
       <Divider />
       <CardFooter className="text-small">
-        Date: {blogPost.created_at}
+        Date: {formatDate(new Date(blogPost.created_at), "MMM dd, yyyy")}
       </CardFooter>
     </Card>
   );

@@ -4,12 +4,13 @@ import { BlogPostEntity } from "@/core/entities/blog-post.entity";
 import { DeleteBlogPostButton } from "./DeleteBlogPostButton";
 import { Button } from "@/components/Button";
 import { useEffect, useState } from "react";
-import { BlogPostFormData, blogPostSchema } from "../schema";
+import { BlogPostFormData, blogPostSchema } from "../../schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormTextField } from "@/components/Forms/FormTextField";
 import { updateBlogPost } from "@/core/use-cases/updateBlogPost";
 import { useRouter } from "next/navigation";
+import { formatDate } from "date-fns";
 
 export const BlogPostDetails = ({
   blogPost,
@@ -36,6 +37,8 @@ export const BlogPostDetails = ({
   const onSubmit = async (values: BlogPostFormData) => {
     const data = await updateBlogPost(blogPostId, values);
     setPost(data);
+
+    setEditMode(false);
   };
 
   return (
@@ -54,7 +57,9 @@ export const BlogPostDetails = ({
           ) : (
             <>
               <h1 className="text-2xl font-bold">{post.title}</h1>
-              <h2 className="text-lg">{post.created_at}</h2>
+              <h2 className="text-lg">
+                {formatDate(new Date(post.created_at), "MMM dd, yyyy")}
+              </h2>
             </>
           )}
         </div>

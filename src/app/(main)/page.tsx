@@ -1,7 +1,7 @@
 import { getBlogPosts } from "@/core/use-cases/getBlogPosts";
 import { BlogPostCard } from "./components/BlogPostCard";
 import { SearchField } from "./components/SearchField";
-import { Dropdown } from "@/components/Dropdown";
+import { SortDropdown } from "./components/SortDropdown";
 
 export type SearchParams = {
   search?: string;
@@ -35,13 +35,7 @@ export default async function Home({
         <div className="flex-1">
           <SearchField term={searchParams?.search} />
         </div>
-        <Dropdown
-          items={[
-            { key: "created_at", label: "Created At" },
-            { key: "title", label: "Title" },
-          ]}
-          currentValue={{ key: "created_at", label: "Created At" }}
-        />
+        <SortDropdown />
       </div>
       {blogPosts.map((blogPost) => {
         return <BlogPostCard key={blogPost.id} blogPost={blogPost} />;

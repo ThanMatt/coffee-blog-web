@@ -1,7 +1,6 @@
 import axios from "axios";
-import { headers } from "next/headers";
 
-const BASE_URL = "http://api:8000/api";
+const BASE_URL = "http://localhost:8000/api";
 
 export const apiClient = {
   get: async (path: string, params?: any) => {
@@ -16,12 +15,7 @@ export const apiClient = {
     return response.data;
   },
   put: async (path: string, body: any) => {
-    const response = await axios.put(`${BASE_URL}${path}`, {
-      body,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.put(`${BASE_URL}${path}`, body);
     return response.data;
   },
 };
