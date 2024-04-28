@@ -13,7 +13,10 @@ export type BlogPostData = {
 export const getBlogPosts = async (
   getBlogPostsParams?: IGetBlogPostsParams
 ) => {
-  const response: BlogPostData[] = await apiClient.get("/blog-post");
+  const response: BlogPostData[] = await apiClient.get(
+    "/blog-post",
+    getBlogPostsParams
+  );
   return response.map(({ id, content, created_at, title, updated_at }) => {
     return new BlogPostEntity({ id, content, created_at, title, updated_at });
   });

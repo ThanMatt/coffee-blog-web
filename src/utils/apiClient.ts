@@ -1,27 +1,27 @@
+import axios from "axios";
+import { headers } from "next/headers";
+
 const BASE_URL = "http://api:8000/api";
 
 export const apiClient = {
-  get: async (path: string) => {
-    const response = await fetch(`${BASE_URL}${path}`);
-    const data = await response.json();
-    return data;
+  get: async (path: string, params?: any) => {
+    const response = await axios.get(`${BASE_URL}${path}`, { params });
+    return response.data;
   },
   delete: async (path: string) => {
     console.log(`${BASE_URL}${path}`);
-    const response = await fetch(`${BASE_URL}${path}`, { method: "DELETE" });
-    const data = await response.json();
-    return data;
+    const response = await axios.delete(`${BASE_URL}${path}`, {
+      method: "DELETE",
+    });
+    return response.data;
   },
   put: async (path: string, body: any) => {
-    const response = await fetch(`${BASE_URL}${path}`, {
-      method: "PUT",
-      body: JSON.stringify(body),
+    const response = await axios.put(`${BASE_URL}${path}`, {
+      body,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
     });
-
-    const data = await response.json();
-    return data;
+    return response.data;
   },
 };
