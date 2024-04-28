@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  coffee-blog-web:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/coffee-blog-web/
+    command: npm run dev
+    networks:
+      - coffee-blog
+
+networks:
+  coffee-blog:
+    external: true
