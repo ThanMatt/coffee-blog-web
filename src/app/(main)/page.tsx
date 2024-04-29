@@ -35,7 +35,6 @@ export default async function Home({
         <div className="flex-1">
           <SearchField term={searchParams?.search} />
         </div>
-        <SortDropdown />
       </div>
       {blogPosts.map((blogPost) => {
         return <BlogPostCard key={blogPost.id} blogPost={blogPost} />;
